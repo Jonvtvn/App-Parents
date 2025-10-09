@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+     <h1>Enviar Mensaje</h1>
+
+    <form th:action="@{/mensaje}" method="post">
+        <input type="text" name="contenido" placeholder="Escribe tu mensaje aquí" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p th:if="${mensajeExito}" th:text="${mensajeExito}" style="color: green;"></p>
+    </div>
+</body>
+</html>
