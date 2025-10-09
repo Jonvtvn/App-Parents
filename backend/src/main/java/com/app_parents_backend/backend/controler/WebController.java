@@ -10,9 +10,8 @@ import com.app_parents_backend.backend.model.prueba; // poo
 import com.app_parents_backend.backend.repository.pruebaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @Controller
-public class WebController{
+public class WebController {
     @Autowired
     private pruebaRepository pruebaRepository;
 
@@ -21,12 +20,13 @@ public class WebController{
         // Return the name of the HTML file (index.html)
         return "index"; // Renderiza index.html
     }
-    /* 
-    Dentro de aca escuchamos el formulario
 
-        obtenemos el input - "mensaje"
-        
-    */
+    /*
+     * Dentro de aca escuchamos el formulario
+     * 
+     * obtenemos el input - "mensaje"
+     * 
+     */
     @PostMapping("/mensaje")
     public String guardarMensaje(@RequestParam("contenido") String contenido, Model model) {
         prueba nuevo = new prueba(contenido);
@@ -35,5 +35,4 @@ public class WebController{
         model.addAttribute("mensajeExito", "✅ Mensaje guardado correctamente");
         return "index"; // Vuelve a mostrar el formulario con el mensaje de éxito
     }
-
 }

@@ -1,4 +1,10 @@
+# Entorno
+.env
+
+# Archivos de ayuda
 HELP.md
+
+# Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
