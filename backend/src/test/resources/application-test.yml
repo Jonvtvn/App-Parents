@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_parent
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+application:
+  security:
+    jwt:
+      secret: MiClaveParaTests
+      expiration: 86400000
+      refresh-token:
+        expiration: 604800000

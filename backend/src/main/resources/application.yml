@@ -1,0 +1,24 @@
+server: 
+  port: 8080
+
+application:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration: ${JWT_EXPIRATION_MS}
+      refresh-token:
+        expiration: ${REFRESH_TOKEN_EXPIRATION_MS}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
