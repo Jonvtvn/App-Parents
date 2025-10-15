@@ -10,8 +10,8 @@ public class BackendApplication {
 	public static void main(String[] args) {
 		// Cargar las variables del archivo .env
 		Dotenv dotenv = Dotenv.load();
+
 		dotenv.entries().forEach(entry -> {
-			// Convertir claves a formato esperado por Spring (puntos y minúsculas)
 			String key = entry.getKey().toLowerCase().replace("_", ".");
 			System.setProperty(key, entry.getValue());
 		});
@@ -19,5 +19,4 @@ public class BackendApplication {
 		// Iniciar la aplicación Spring Boot
 		SpringApplication.run(BackendApplication.class, args);
 	}
-
 }
