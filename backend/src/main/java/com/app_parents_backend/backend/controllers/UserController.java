@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.app_parents_backend.backend.services.UserService;
-import com.app_parents_backend.backend.models.UserChildren;
+import com.app_parents_backend.backend.models.User;
 
 
 @RestController
-@RequestMapping("/UserChildren")
-public class UserChildrenController{
+@RequestMapping("/User")
+public class UserController{
     @Autowired
     UserService userService;
 
     @GetMapping()
-    public  ArrayList<UserChildren> obtenerUserChildren(){
-        return userService.obtenerUserChildren();
+    public  ArrayList<User> obtenerUser(){
+        return userService.obtenerUser();
     }
 
     @PostMapping()
-    public UserChildren guardaUserChildren(@RequestBody UserChildren usuario){
-        return this.userService.guardaUserChildren(usuario);
+    public User guardaUser(@RequestBody User usuario){
+        return this.userService.guardaUser(usuario);
     }
 }

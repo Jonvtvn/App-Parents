@@ -1,30 +1,32 @@
 package com.app_parents_backend.backend.models;
 
 import jakarta.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
-
-
 @Entity
-@Table(name = "UserChildren")
-public class UserChildren{
+@Table(name = "User")
+public class User{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true,nullable=false)
     private Long id;
-
+    private String username;
     private String nombre;
     private String password;
     private String email;
     private String address;
     private Integer numero;
-    private boolean state_family;
+    private boolean state_family; // True = Adult , False = Children
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date fecha_nacimiento;
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     //GET
     public Long getId(){
@@ -80,6 +82,13 @@ public class UserChildren{
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 
 }

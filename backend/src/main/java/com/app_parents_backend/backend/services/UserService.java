@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app_parents_backend.backend.models.UserChildren;
-import com.app_parents_backend.backend.models.UserParents;
-import com.app_parents_backend.backend.repositories.UserChildrenRepository;
-import com.app_parents_backend.backend.repositories.UserParentsRepository;
+import com.app_parents_backend.backend.models.User;
+import com.app_parents_backend.backend.repositories.UserRepository;
 
 
 
@@ -16,24 +14,15 @@ import com.app_parents_backend.backend.repositories.UserParentsRepository;
 public class UserService {
 
     @Autowired
-    private UserChildrenRepository userChildrenRepository;
+    private UserRepository userRepository;
 
-    @Autowired
-    private UserParentsRepository userParentsRepository;
-    
-    public ArrayList<UserChildren> obtenerUserChildren(){
-        return (ArrayList<UserChildren>) userChildrenRepository.findAll();
+    public ArrayList<User> obtenerUser(){
+        return (ArrayList<User>) userRepository.findAll();
     }
 
-    public UserChildren guardaUserChildren(UserChildren usuario){
-        return userChildrenRepository.save(usuario);
+    public User guardaUser(User usuario){
+        return userRepository.save(usuario);
     }
 
-    public ArrayList<UserParents> obtenerUserParents(){
-        return (ArrayList<UserParents>) userParentsRepository.findAll();
-    }
 
-    public UserParents guardaUserParents(UserParents usuario){
-        return userParentsRepository.save(usuario);
-    }
 }

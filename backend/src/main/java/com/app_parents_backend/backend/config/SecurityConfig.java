@@ -1,34 +1,32 @@
-// package com.app_parents_backend.config;
+package com.app_parents_backend.backend.config;
 
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import
-// org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-// import org.springframework.security.web.SecurityFilterChain;
-// import
-// org.springframework.security.config.annotation.web.builders.HttpSecurity;
-// import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-// @Configuration
-// @EnableWebSecurity
-// public class SecurityConfig {
+@Configuration
+public class SecurityConfig {
 
-// @Bean
-// public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
-// Exception {
-// http
-// // 🔥 Forma actual recomendada para desactivar CSRF
-// .csrf(csrf -> csrf.disable())
+    private final JwtFilter jwtFilter;
 
-// // 👇 Configura las reglas de autorización
-// .authorizeHttpRequests(auth -> auth
-// .requestMatchers("/api/public/**").permitAll()
-// .anyRequest().authenticated())
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
 
-// // ✅ Autenticación básica (user + password generada)
-// .httpBasic(httpBasic -> {
-// });
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**").permitAll() // login/register abiertos
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-// return http.build();
-// }
-// }
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+}
