@@ -1,5 +1,6 @@
 package com.app_parents_backend.backend.controllers;
 
+import com.app_parents_backend.backend.models.LoginRequest;
 import com.app_parents_backend.backend.models.User;
 import com.app_parents_backend.backend.services.AuthService;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return authService.login(username, password);
+    public String login(@RequestBody LoginRequest request) {
+        return authService.login(request.getUsername(), request.getPassword());
     }
 
     @PostMapping("/register")
-    public User register(@RequestParam String username, @RequestParam String password) {
-        return authService.register(username, password);
+    public User register(@RequestBody User user) {
+        return authService.register(user.getUsername(), user.getPassword(), user.getName(), user.getEmail(),
+                user.getAddress(), user.getNumber(), user.isState_family(), user.getBirth_date());
     }
 }
