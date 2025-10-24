@@ -30,6 +30,11 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birth_date;
 
+    // builders
+
+    public User() {}
+
+    // register construct
     public User(String username, String password, String name, String email, String address, Integer number,
             boolean state_family, Date birth_date) {
         this.username = username;
@@ -42,15 +47,13 @@ public class User {
         this.birth_date = birth_date;
     }
 
-    public User() {
-    }
-
-    // Constructor con parámetros opcional
+    //Login construct
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    // Get and Set
     public Long getId() {
         return id;
     }

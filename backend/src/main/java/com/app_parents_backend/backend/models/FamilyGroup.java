@@ -10,18 +10,20 @@ public class FamilyGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Long id;
-
+    @Column(unique = true, nullable = false)
     private String nameGroup; // Nombre del grupo
+    @Column(nullable = false)
     private String password; // contraseña del grupo
 
     @Temporal(TemporalType.TIMESTAMP)
+    @SuppressWarnings("FieldMayBeFinal")
     private Date dateCreation = new Date();
 
     // El padre que creó el grupo
     @ManyToOne
     @JoinColumn(name = "admin_id")
-
     private User admin;
 
     // Lista de usuarios padres
@@ -31,6 +33,14 @@ public class FamilyGroup {
         // Inicializar las listas para evitar NullPointerException
         this.listaUser = new ArrayList<>();
     }
+
+    public FamilyGroup(User admin, Long id, String nameGroup, String password) {
+        this.admin = admin;
+        this.id = id;
+        this.nameGroup = nameGroup;
+        this.password = password;
+    }
+
 
     // === Getters y Setters ===
 

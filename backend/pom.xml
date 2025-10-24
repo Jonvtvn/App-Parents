@@ -35,12 +35,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency> -->
-
-	<dependency>
-		<groupId>me.paulschwarz</groupId>
-		<artifactId>spring-dotenv</artifactId>
-		<version>4.0.0</version>
-	</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>me.paulschwarz</groupId>
+			<artifactId>spring-dotenv</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 			<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
