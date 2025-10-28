@@ -35,7 +35,7 @@ public class FamilyGroupService {
     }
 
     public FamilyGroup addUserToGroup(FamilyGroup group, User user) {
-        group.getListaUser().add(user);
+        group.getMiembros().add(user);
         return familyGroupRepository.save(group);
     }
 }

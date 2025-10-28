@@ -26,6 +26,7 @@ public class JoinRequest {
     private Status status = Status.PENDING;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @SuppressWarnings("FieldMayBeFinal")
     private Date requestDate = new Date();
 
     public enum Status {
@@ -39,8 +40,8 @@ public class JoinRequest {
     public FamilyGroup getGroup() { return group; }
     public void setGroup(FamilyGroup group) { this.group = group; }
 
-    public User getuserRequest() { return userRequest; }
-    public void setuserRequest(User userRequest) { this.userRequest = userRequest; }
+    public User getUserRequest() { return userRequest; }
+    public void setUserRequest(User userRequest) { this.userRequest = userRequest; }
 
 
     public Status getStatus() { return status; }

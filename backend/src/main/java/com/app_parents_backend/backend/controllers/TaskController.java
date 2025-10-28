@@ -37,20 +37,26 @@ public class TaskController {
     @GetMapping("/received")
     public List<Task> getReceivedMessages(Authentication authentication) {
         String username = authentication.getName();
-        return TaskService.getMessagesReceived(username);
+        User username_User = userRepository.findByUsername(username)  // => Validamos que el usuario exista 
+            .orElseThrow(() -> new RuntimeException("Remitente no encontrado"));
+        return TaskService.getMessagesReceived(username_User);
     }
 
     // Ver mensajes enviados
     @GetMapping("/sent")
     public List<Task> getSentMessages(Authentication authentication) {
         String username = authentication.getName();
-        return TaskService.getMessagesSent(username);
+        User username_User = userRepository.findByUsername(username)  // => Validamos que el usuario exista 
+            .orElseThrow(() -> new RuntimeException("Remitente no encontrado"));
+        return TaskService.getMessagesSent(username_User);
     }
 
     // Ver conversación con otro usuario
     @GetMapping("/conversation/{receiverUsername}")
-    public List<Task> getConversation(@PathVariable String receiverUsername, Authentication authentication) {
+    public List<Task> getConversation(@PathVariable User receiverUsername, Authentication authentication) {
         String senderUsername = authentication.getName();
-        return TaskService.getConversation(senderUsername, receiverUsername);
+        User username_User = userRepository.findByUsername(senderUsername)  // => Validamos que el usuario exista 
+            .orElseThrow(() -> new RuntimeException("Remitente no encontrado"));
+        return TaskService.getConversation(username_User, receiverUsername);
     }
 }

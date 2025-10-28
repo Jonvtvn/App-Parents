@@ -1,8 +1,11 @@
 package com.app_parents_backend.backend.models;
 
-import java.util.ArrayList;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "family_group")
@@ -12,76 +15,61 @@ public class FamilyGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+
     @Column(unique = true, nullable = false)
-    private String nameGroup; // Nombre del grupo
+    private String nameGroup;
+
     @Column(nullable = false)
-    private String password; // contraseña del grupo
+    private String password;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @SuppressWarnings("FieldMayBeFinal")
-    private Date dateCreation = new Date();
+    private Date dateCreation;
 
-    // El padre que creó el grupo
+    // Admin del grupo
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private User admin;
 
-    // Lista de usuarios padres
-    private ArrayList<User> listaUser;
+    // Miembros del grupo
+    @ManyToMany
+    @JoinTable(
+        name = "group_users",
+        joinColumns = @JoinColumn(name = "group_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> miembros = new HashSet<>();
 
-    public FamilyGroup() {
-        // Inicializar las listas para evitar NullPointerException
-        this.listaUser = new ArrayList<>();
-    }
+    // ----- Constructores -----
 
-    public FamilyGroup(User admin, Long id, String nameGroup, String password) {
+    public FamilyGroup() {}
+
+    public FamilyGroup(User admin, String nameGroup, String password) {
         this.admin = admin;
-        this.id = id;
         this.nameGroup = nameGroup;
         this.password = password;
+        this.miembros.add(admin); // El creador siempre es miembro
     }
 
+    // ----- Getters y Setters -----
 
-    // === Getters y Setters ===
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
+    public String getNameGroup() { return nameGroup; }
+    public void setNameGroup(String nameGroup) { this.nameGroup = nameGroup; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public Date getDateCreation() { return dateCreation; }
+
+    public User getAdmin() { return admin; }
+    public void setAdmin(User admin) { this.admin = admin; }
+
+    public Set<User> getMiembros() { return miembros; }
+    public void setMiembros(Set<User> miembros) { this.miembros = miembros; }
+
+    public void agregarMiembro(User user) {
+        this.miembros.add(user);
     }
-
-    public String getNameGroup() {
-        return nameGroup;
-    }
-
-    public void setNameGroup(String nameGroup) {
-        this.nameGroup = nameGroup;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public User getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(User admin) {
-        this.admin = admin;
-    }
-
-    public ArrayList<User> getListaUser() {
-        return listaUser;
-    }
-
-    public void setListaUser(ArrayList<User> listaUser) {
-        this.listaUser = listaUser;
-    }
-
 }

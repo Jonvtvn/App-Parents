@@ -28,7 +28,7 @@ public class JoinRequestService {
     public JoinRequest createRequest(FamilyGroup group, User user) {
         JoinRequest request = new JoinRequest();
         request.setGroup(group);
-        request.setuserRequest(user);
+        request.setUserRequest(user);
         request.setStatus(Status.PENDING);
         return joinRequestRepository.save(request);
     }

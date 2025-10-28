@@ -11,7 +11,12 @@ public class Task {
     @Column(unique = true, nullable = false)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "sender_id", nullable = false)
     private User senderUsername;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", nullable = false)
     private User receiverUsername;
 
     @Column(length = 500)

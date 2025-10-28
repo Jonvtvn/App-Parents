@@ -7,12 +7,14 @@ import com.app_parents_backend.backend.models.Task;
 
 import java.util.List;
 
+import com.app_parents_backend.backend.models.User;
+
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findByReceiverUsername(String receiverUsername);
+    List<Task> findByReceiverUsername(User receiverUsername);
 
-    List<Task> findBySenderUsername(String senderUsername);
+    List<Task> findBySenderUsername(User senderUsername);
 
-    List<Task> findBySenderUsernameAndReceiverUsername(String senderUsername, String receiverUsername);
+    List<Task> findBySenderUsernameAndReceiverUsername(User senderUsername, User receiverUsername);
 }
